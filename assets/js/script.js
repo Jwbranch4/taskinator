@@ -223,7 +223,6 @@ var loadTasks = function () {
   if (!savedTasks) {
     return false;
   }
-  console.log("Saved tasks found!");
 
   //convert tasks from the string format back into an array of objects
   savedTasks = JSON.parse(savedTasks);
