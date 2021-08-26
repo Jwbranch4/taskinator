@@ -53,6 +53,7 @@ var completeEditTask = function (taskName, taskType, taskId) {
       tasks[i].type = taskType;
     }
   }
+  saveTasks();
 };
 
 var createTaskEl = function (taskDataObj) {
@@ -86,6 +87,7 @@ var createTaskEl = function (taskDataObj) {
   tasksToDoEl.appendChild(listItemEl);
   taskDataObj.id = taskIdCounter;
   tasks.push(taskDataObj);
+  saveTasks();
   //increase task counter for next unique id
   taskIdCounter++;
 };
@@ -166,6 +168,7 @@ var deleteTask = function (taskId) {
   }
   // reassign tasks array to be the same as updatedTaskArr
   tasks = updatedTaskArr;
+  saveTasks();
 };
 
 var taskStatusChangeHandler = function (event) {
@@ -190,6 +193,7 @@ var taskStatusChangeHandler = function (event) {
       tasks[i].status = statusValue;
     }
   }
+  saveTasks();
 };
 
 formEl.addEventListener("submit", taskFormHandler);
@@ -209,6 +213,9 @@ var taskButtonHandler = function (event) {
     var taskId = targetEl.getAttribute("data-task-id");
     deleteTask(taskId);
   }
+};
+var saveTasks = function () {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 };
 pageContentEl.addEventListener("click", taskButtonHandler);
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
